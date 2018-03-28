@@ -238,7 +238,7 @@ define(["storymaps/ui/crossfader/CrossFader",
 				
 				// Crossfader height is the full height not just the image
 				var cFaderHeight = height < availableHeight ? availableHeight : height;
-				$("#y").width(width);
+				$("#cfader").width(width);
 				$("#cfader").height(cFaderHeight);
 				
 				// Picture panel new dimension 
