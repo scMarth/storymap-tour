@@ -196,7 +196,7 @@ define(["storymaps/ui/inlineFieldEdit/InlineFieldEdit",
 					$(_placardContainer).toggleClass("force-hidden", ! isInBuilderMode && title === "" && caption === "");
 
 					// Magic static ratio - needs to be worked out
-					_actualImageWidth = 400 * 16 / 8;
+					_actualImageWidth = 400 * 1504 / 1099;
 					_actualImageHeight = 400;
 
 					setTimeout(function(){
