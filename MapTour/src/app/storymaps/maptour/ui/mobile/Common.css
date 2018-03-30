@@ -120,7 +120,7 @@ body.notNumbered  .tourPointName {
 .tourPointIframe {
 	margin-top:10px;
 	width: 90%;
-	height: 500px;
+	height: auto;
 	border:5px #fff solid;
 	-webkit-box-shadow: 2px 2px 3px 0px #444444;
 	box-shadow: 2px 2px 3px 0px #444444;
