@@ -162,15 +162,23 @@ var SwipeView = (function (window, document) {
 		},
 
 		refreshSize: function () {
-			this.wrapperWidth = this.wrapper.clientWidth;
+			console.log("refreshSize: this.wrapperWidth", this.wrapperWidth);
+			console.log("refreshSize: this.wrapper.clientWidth", this.wrapper.clientWidth);
+			//this.wrapperWidth = this.wrapper.clientWidth;
+			this.wrapperWidth = $(window).width();
 			this.wrapperHeight = this.wrapper.clientHeight;
+			console.log("refreshSize: this", this);
+			console.log("refreshSize: this.pageWidth", this.pageWidth);
 			this.pageWidth = this.wrapperWidth;
+			console.log("refreshSize: this.pageWidth", this.pageWidth);
 			this.maxX = -this.options.numberOfPages * this.pageWidth + this.wrapperWidth;
+			console.log("refreshSize: this.maxX", this.maxX);
 			this.snapThreshold = this.options.snapThreshold === null ?
 				Math.round(this.pageWidth * 0.15) :
 				/%/.test(this.options.snapThreshold) ?
 					Math.round(this.pageWidth * this.options.snapThreshold.replace('%', '') / 100) :
 					this.options.snapThreshold;
+			console.log("refreshSize: this.snapThreshold", this.snapThreshold);
 		},
 
 		updatePageCount: function (n) {
@@ -191,7 +199,13 @@ var SwipeView = (function (window, document) {
 			this.page = p;
 			this.pageIndex = p;
 			this.slider.style[transitionDuration] = '0s';
+			console.log("goToPage: calling __pos");
 			this.__pos(-p * this.pageWidth);
+
+			console.log("goToPage: p", p);
+			console.log("goToPage: this.page", this.page);
+			console.log("goToPage: this.pageIndex", this.pageIndex);
+			console.log("goToPage: this.pageWidth", this.pageWidth);
 
 			this.currentMasterPage = (this.page + 1) - Math.floor((this.page + 1) / 3) * 3;
 
@@ -231,6 +245,7 @@ var SwipeView = (function (window, document) {
 
 			this.directionX = -1;
 			this.x -= 1;
+			console.log("next: calling __checkPosition");
 			this.__checkPosition();
 		},
 
@@ -239,6 +254,7 @@ var SwipeView = (function (window, document) {
 
 			this.directionX = 1;
 			this.x += 1;
+			console.log("prev: calling __checkPosition");
 			this.__checkPosition();
 		},
 
@@ -252,6 +268,7 @@ var SwipeView = (function (window, document) {
 					break;
 				case cancelEvent:
 				case endEvent:
+					console.log("handleEvent: calling __end");
 					this.__end(e);
 					break;
 				case resizeEvent:
@@ -272,12 +289,14 @@ var SwipeView = (function (window, document) {
 		*/
 		__pos: function (x) {
 			this.x = x;
+			console.log("__pos: x", x);
 			this.slider.style[transform] = 'translate(' + x + 'px,0)' + translateZ;
 		},
 
 		__resize: function () {
 			this.refreshSize();
 			this.slider.style[transitionDuration] = '0s';
+			console.log("__resize: calling __pos");
 			this.__pos(-this.page * this.pageWidth);
 		},
 
@@ -316,6 +335,10 @@ var SwipeView = (function (window, document) {
 				deltaY = point.pageY - this.pointY,
 				newX = this.x + deltaX,
 				dist = Math.abs(point.pageX - this.startX);
+
+
+			console.log("__move: deltaX", deltaX);
+			console.log("__move: this.x", this.x);
 
 			this.moved = true;
 			this.pointX = point.pageX;
@@ -356,6 +379,8 @@ var SwipeView = (function (window, document) {
 				newX = this.x + (deltaX / 2);
 			}*/
 
+			console.log("__move: newX", newX);
+			console.log("__move: calling __pos");
 			this.__pos(newX);
 		},
 
@@ -377,10 +402,11 @@ var SwipeView = (function (window, document) {
 			// Check if we exceeded the snap threshold
 			if (dist < this.snapThreshold) {
 				this.slider.style[transitionDuration] = Math.floor(300 * dist / this.snapThreshold) + 'ms';
+				console.log("__end: calling __pos");
 				this.__pos(-this.page * this.pageWidth);
 				return;
 			}
-
+			console.log("__end: calling __checkPosition");
 			this.__checkPosition();
 		},
 
@@ -437,6 +463,7 @@ var SwipeView = (function (window, document) {
 			if (this.x == newX) {
 				this.__flip();		// If we swiped all the way long to the next page (extremely rare but still)
 			} else {
+				console.log("__checkPosition: calling __pos");
 				this.__pos(newX);
 				if (this.options.hastyPageFlip) this.__flip();
 			}
