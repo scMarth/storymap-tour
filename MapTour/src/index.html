@@ -8,8 +8,9 @@
 		<meta name="apple-mobile-web-app-capable" content="yes">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
 
-		<link type="image/ico" rel="shortcut icon" href="resources/icons/favicon.ico">
-		<link type="image/ico" rel="icon"  href="resources/icons/favicon.ico">
+<!-- 		<link type="image/ico" rel="shortcut icon" href="resources/icons/favicon.ico">
+		<link type="image/ico" rel="icon"  href="resources/icons/favicon.ico"> -->
+      <link rel="icon" href="./resources/images/SalinasLogoTagline.png">
 
 		<!--
 			To correctly reference your Map Tour in search engine:
@@ -42,12 +43,12 @@
 				// - Web map and application can be dynamically specified through url parameters (webmap and appid)
 				//   if the authorizedOwners property is specified (see below)
 				// - If an application id is specified, the webmap configuration isn't used
-				webmap: "",
+				webmap: "7190edafe7464cb19c1caf1360cd6ee5",
 				appid: "",
 				// Optional list of authorized application or web map owners
 				// Has to be specified when using appid or webmap url parameters (e.g. ["user1"], ["user1", "user2"])
 				// To authorize all users you can use ["*"]
-				authorizedOwners: [""],
+				authorizedOwners: ["*"],
 				// Select the application layout between "three-panel" and "integrated"
 				layout: "three-panel",
 				// The application header title, if no title is specified, the webmap's title is used
@@ -58,7 +59,7 @@
 				// Otherwise the upper visible point layer is used (excluding map notes)
 				sourceLayerTitle: "",
 				// Use the first data record as an introduction instead of a point (can be overridden through URL)
-				firstRecordAsIntro: true,
+				firstRecordAsIntro: false,
 				// Optional zoom level to be applied for the story points following introduction (can be overridden through URL) (e.g: 0 to 16 for Gray Canvas, 0 to 19 for Street Map, -1 to disable)
 				zoomLevel: -1
 			};
@@ -68,10 +69,9 @@
 			// Optionally Bing Maps key, Geometry and Geocode service's URLs can be configured in app/maptour-config.js. This is only required
 			//  if the Organization or Portal for ArcGIS instance default configuration has to be overwritten.
 		</script>
-
 		<script type="text/javascript">
 			var version = '2.10.0';
-			var isProduction = false;
+			var isProduction = true;
 			// IE 9 and below are not compatible with script async attribute.
 			var canUseAsyncAttr = true;
 
@@ -82,6 +82,7 @@
 				if(version <= 9)
 					canUseAsyncAttr = false;
 			}
+
 
 			function loadJS(url, isExternal)
 			{
@@ -198,97 +199,100 @@
 	</head>
 	<body class="claro">
 		<style>
-			/* CUSTOM CSS RULES */
+		#header {
+		  Background-image: url(//giswebservices.ci.salinas.ca.us/storymaps/SalinasRoundabouts/resources/images/RoundaboutBanner1.png);
+		  Background-position: left; background-repeat: no-repeat; height: 115px; background-color: #224c5b !important; overflow: hidden !important;
+		}
+		h1.title {
+		  opacity: 0 !important;
+		}
+		#headerMobile {
+		  background-color: #224c5b !important;
+		}
+		#openHeaderMobile {
+		  background-color: #224c5b !important;
+		}
+		#footer {
+		  background-color: #a3bcddd9 !important; border-radius: 20px;
+		}
+		#footerMobile {
+		  background-color: #a3bcddd9 !important;
+		}
+		.member-image.current img,
+		.member-image.current iframe {
+		  border-radius: 20px !important; background-color: transparent !important;
+		}
+		.member-image.current {
+		  border: 0px !important;
+		}
+		#placardContainer {
+		  border-radius: 0px 0px 20px 20px; left: 0px !important;
+		}
+		#placard .description {
+		  font-size: 16px;
+		}
+		.carousel-item-div {
+		  background-color: #e4e1e1; box-shadow: 4px 4px 2px #535456; font-size: 11.5px !important; font-weight: bold; opacity: 1 !important;
+		}
+		.carousel-item-div.selected {
+		  background-color: #fff !important; box-shadow: inset 0 0 12px grey; border 1px grey;
+		}
+		.carouselScroller.no-touch .carousel-item-div:not(.selected):hover {
+		  background-color: #5d6f89 !important;
+		}
+		.tpImgPane {
+		  background-color: #e4e1e1 !important; border: 3px #e4e1e1 solid !important;
+		}
+		.tpImgContainer {
+		  background-color: #e4e1e1 !important;
+		}
+		.listItem {
+		  background-color: #a3bcdd !important;
+		}
+		#listPanelScroller .listPanel {
+		  background-color: #224c5b !important;
+		}
+		#listPanel.mobileView {
+		  background-color: #224c5b !important;
+		}
+		#infoPanel.mobileView {
+		  background-color: #a3bcdd !important;
+		}
 
-			h1.title {
-			  opacity: 0 !important;
-			}
-			#headerMobile {
-			  background-color: #224c5b !important;
-			}
-			#openHeaderMobile {
-			  background-color: #224c5b !important;
-			}
-			#footer {
-			  background-color: #a3bcddd9 !important; border-radius: 20px;
-			}
-			#footerMobile {
-			  background-color: #a3bcddd9 !important;
-			}
-			.member-image.current img,
-			.member-image.current iframe {
-			  border-radius: 20px !important; background-color: transparent !important;
-			}
-			.member-image.current {
-			  border: 0px !important;
-			}
-			#placardContainer {
-			  border-radius: 0px 0px 20px 20px; left: 0px !important;
-			}
-			#placard .description {
-			  font-size: 16px;
-			}
-			.carousel-item-div {
-			  background-color: #e4e1e1; box-shadow: 4px 4px 2px #535456; font-size: 11.5px !important; font-weight: bold; opacity: 1 !important;
-			}
-			.carousel-item-div.selected {
-			  background-color: #fff !important; box-shadow: inset 0 0 12px grey; border 1px grey;
-			}
-			.carouselScroller.no-touch .carousel-item-div:not(.selected):hover {
-			  background-color: #5d6f89 !important;
-			}
-			.tpImgPane {
-			  background-color: #e4e1e1 !important; border: 3px #e4e1e1 solid !important;
-			}
-			.tpImgContainer {
-			  background-color: #e4e1e1 !important;
-			}
-			.listItem {
-			  background-color: #a3bcdd !important;
-			}
-			#listPanelScroller .listPanel {
-			  background-color: #224c5b !important;
-			}
-			#listPanel.mobileView {
-			  background-color: #224c5b !important;
-			}
-			#infoPanel.mobileView {
-			  background-color: #a3bcdd !important;
-			}
+		span.btn-fullscreen {
+			background: none;
+			background-image: url(./resources/images/FullScreenIcon.png);
+			width: 52px !important; height: 52px !important; background-repeat: no-repeat; background-position: center left; background-size: 50px 50px;
+		}
 
-			span.btn-fullscreen {
-				background: none;
-				background-image: url(./resources/images/FullScreenIcon.png);
-				width: 52px !important; height: 52px !important; background-repeat: no-repeat; background-position: center left; background-size: 50px 50px;
-			}
+		#toggle, #toggle.closed {
+			background-image: none;
+		}
 
-			#toggle, #toggle.closed {
-				background-image: none;
-			}
+		#toggle:before, #toggle.closed:before {
+			display: inline-block;
+			height: 100% !important;
+			width: 50px;
+			padding-left: 20px;
+			padding-right: 20px;
+			border-radius: 10px 10px 0px 0px;
+			background-color: rgba(0, 0, 0, .8);
+			color: white;
+			text-align: center;
+		}
 
-			#toggle:before, #toggle.closed:before {
-				display: inline-block;
-				height: 100% !important;
-				width: 50px;
-				padding-left: 20px;
-				padding-right: 20px;
-				border-radius: 10px 10px 0px 0px;
-				background-color: rgba(0, 0, 0, .8);
-				color: white;
-				text-align: center;
-			}
+		#toggle:before{
+			content: "Hide";
+		}
 
-			#toggle:before{
-				content: "Hide";
-			}
+		#toggle.closed:before{
+			content: "Show";
+		}
 
-			#toggle.closed:before{
-				content: "Show";
-			}
+		#toggle:hover::before, #toggle.closed:hover::before {
+			background-color: #555;
+		}
 
-			#toggle:hover::before, #toggle.closed:hover::before {
-				background-color: #555;
-			}
 		</style>
 		<div id="header">
 			<!-- Mobile header -->
@@ -690,7 +694,7 @@
 			<div class="modal-footer">
 				<span class="error"></span>
 				<span class="success"></span><img src="resources/icons/loader-upload.gif" class="addSpinner" />
-    			<button class="btnSave btn btn-primary"></button>
+				<button class="btnSave btn btn-primary"></button>
 				<button class="btnClose btn" data-dismiss="modal" aria-hidden="true"></button>
 			</div>
 		</div>
@@ -1244,27 +1248,26 @@
 			</table>
 		</div>
 
-		<script src="https://js.arcgis.com/3.23/init.js"></script>
+	<script src="https://js.arcgis.com/3.23/init.js"></script>
 		<script type="text/javascript">
 			loadJS('app/maptour-config.js');
 
 			function getUrlVar(name)
 			{
-			    var vars = [], hash;
-			   	if( window.location.href.indexOf('?') == -1 ) return null;
+				var vars = [], hash;
+				if( window.location.href.indexOf('?') == -1 ) return null;
 
-			    var hashes = window.location.href.slice(window.location.href.indexOf('?') + 1).split('&');
-			    for(var i = 0; i < hashes.length; i++){
-			        hash = hashes[i].split('=');
+				var hashes = window.location.href.slice(window.location.href.indexOf('?') + 1).split('&');
+				for(var i = 0; i < hashes.length; i++){
+					hash = hashes[i].split('=');
 					hash[0] = hash[0].split('#')[0];
-			        vars.push(hash[0]);
-			        vars[hash[0]] = (hash[1] == undefined) ? "true" : hash[1];
-			    }
-			    return vars[name];
+					vars.push(hash[0]);
+					vars[hash[0]] = (hash[1] == undefined) ? "true" : hash[1];
+				}
+				return vars[name];
 			}
 
 			if( isProduction ) {
-				
 				if( getUrlVar('edit') || getUrlVar('fromScratch') || getUrlVar('fromscratch') || getUrlVar('fromGallery') )
 					loadJS('app/maptour-builder-min.js');
 				else
@@ -1306,5 +1309,6 @@
 				})();
 			}
 		</script>
+
 	</body>
 </html>
